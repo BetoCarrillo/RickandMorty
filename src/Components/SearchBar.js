@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import fetchData from './Characters'
 
-function SearchBar() {
+
+function SearchBar({setSearch}) {
+
   return (
-    <div>Searchbar</div>
+    <div className="header">
+      <input placeholder="   Search" className='searchBar' onChange={e => { setSearch(e.target.value) }}></input>    
+      
+</div>
+ 
   )
 }
 

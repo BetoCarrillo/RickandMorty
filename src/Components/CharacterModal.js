@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 
 function CharacterModal({character}) {
     const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
    
   return (
