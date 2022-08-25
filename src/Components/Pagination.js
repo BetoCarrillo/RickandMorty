@@ -1,23 +1,29 @@
-import React from 'react'
 import Pagination from 'react-bootstrap/Pagination';
 
 
-function createPagination({page, setPage }) {
+
+function createPagination({page, setPage, fetchData }) {
    
     const decrementPage = () => {
         //console.log(page)
-        setPage(page-1);
+      setPage(page - 1);
 }
 
     const incrementPage = () => {
         //console.log(page)
-        setPage(page+1);
-}
-    
+      setPage(page + 1);
+      
+    }
+  
   return (
     <Pagination className='pagination'>
-          <Pagination.Prev onClick={decrementPage}  />
-      <Pagination.Next onClick={incrementPage} />
+      {page>1 ? 
+<Pagination.Prev onClick={decrementPage}  /> : <Pagination/>
+      }
+        {page<42 ? 
+<Pagination.Next onClick={incrementPage}  /> : <Pagination/>
+      }
+   
     </Pagination>
   );
 }

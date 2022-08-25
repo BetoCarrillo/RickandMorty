@@ -22,9 +22,10 @@ function Characters() {
 
   useEffect(() => {
     fetchData();
-  },[page, search]);
+  }, [page, search]);
  
  
+
   return (
     <div> <div>
         <SearchBar setSearch={setSearch}/>
@@ -37,8 +38,10 @@ function Characters() {
       })}
         
       </div >
-         <div className='pad'>
-        <Pagination setPage={setPage} page={page} />
+{/* {fetchData === [] ? <Pagination setPage={setPage} page={page} /> : <Pagination/>   } */}
+<Pagination setPage={setPage} page={page} />
+      <div className='pad'>
+        
         </div>
     </div>
   )
