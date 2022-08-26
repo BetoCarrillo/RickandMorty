@@ -5,44 +5,54 @@ import Pagination from './Pagination';
 
 
 function Characters() {
-  const [characters, setCharacters] = useState();
+  const [characters, setCharacters] = useState(0);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [loader, setLoader] = useState(true);
+  const [maxpages, setMaxpages] = useState("");
   
   const fetchData = async () => {
+  
     try {
       const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}&name=${search}`);
       const result = await response.json();
-      setCharacters(result.results);
-      //console.log(data);
+      setMaxpages(result.info.pages)
+      setCharacters(result.results); 
+      setLoader(false);
     } catch (error) {
       console.log(error)
-    }
+      
+    } 
+    
   };
+
+ 
 
   useEffect(() => {
     fetchData();
-  }, [page, search]);
- 
+  },[search, page]);
  
 
   return (
-    <div> <div>
-        <SearchBar setSearch={setSearch}/>
-    </div >
+    <div>
+      
+      
+
+      <SearchBar setSearch={setSearch} setCharacters={setCharacters}/>
+   
       < div className='cardsDiv'>
-      {characters && characters.map((character, i) => {
-      return <div key={i}>
-        <CharacterCard character={character}/>
-      </div>
-      })}
+        {!loader ? (characters && characters.map((character, i) => {
+          return <div key={i}>
+            <CharacterCard character={character} />
+          </div>
+        })) : ("")}
         
       </div >
-{/* {fetchData === [] ? <Pagination setPage={setPage} page={page} /> : <Pagination/>   } */}
-<Pagination setPage={setPage} page={page} />
+      {fetchData() ? <Pagination setPage={setPage} page={page}  maxpages={maxpages} setMaxpages ={setMaxpages}  /> : ("")
+      }
       <div className='pad'>
         
-        </div>
+      </div>
     </div>
   )
 }
